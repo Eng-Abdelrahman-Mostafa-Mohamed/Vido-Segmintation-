@@ -7,3 +7,4 @@
   - Draw bounding boxes around the detected text and apply last steps for segment text captions only 
   - Display the frame with the bounding boxes 
 ![image](https://github.com/Eng-Abdelrahman-Mostafa-Mohamed/Vido-Segmintation-/assets/116603423/d9fa19a1-a431-4522-9db5-c8c8cb157243)
+                                                                                                                                                                                          # check Teston_video.py 📔 
