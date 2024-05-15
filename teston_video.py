@@ -17,53 +17,53 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files (x86)\\Tesseract-OCR
 #### the big problem is that the text is not clear and the bounding boxes are not accurate so we need to improve the segmentation and the OCR accuracy it's extract objs as text captions
 # 
 
-
-def detect_subtitles(processed_frame):
-    d = pytesseract.image_to_data(processed_frame, output_type=pytesseract.Output.DICT)
-    subtitle_bboxes = []
-    word_bboxes = []
-    n_boxes = len(d['level'])
-    for i in range(n_boxes):
-        (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
-        text = d['text'][i].strip() # for deviding sent into words 
-        if text:
-            word_bboxes.append((x, y, w, h))
-            if len(subtitle_bboxes) == 0:
-                subtitle_bboxes.append((x, y, w, h))
-            else:
-                last_bbox = subtitle_bboxes[-1]
-                if abs(y - last_bbox[1]) < h:  # Assume same line if y-difference is less than height
-                    subtitle_bboxes[-1] = (min(x, last_bbox[0]), min(y, last_bbox[1]), max(w, last_bbox[2]), max(h, last_bbox[3]))
-                else:
-                    subtitle_bboxes.append((x, y, w, h))
+ # if we want to detect the text in the frame we need to apply the following steps
+# def detect_subtitles(processed_frame):
+#     d = pytesseract.image_to_data(processed_frame, output_type=pytesseract.Output.DICT)
+#     subtitle_bboxes = []
+#     word_bboxes = []
+#     n_boxes = len(d['level'])
+#     for i in range(n_boxes):
+#         (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
+#         text = d['text'][i].strip() # for deviding sent into words 
+#         if text:
+#             word_bboxes.append((x, y, w, h))
+#             if len(subtitle_bboxes) == 0:
+#                 subtitle_bboxes.append((x, y, w, h))
+#             else:
+#                 last_bbox = subtitle_bboxes[-1]
+#                 if abs(y - last_bbox[1]) < h:  # Assume same line if y-difference is less than height
+#                     subtitle_bboxes[-1] = (min(x, last_bbox[0]), min(y, last_bbox[1]), max(w, last_bbox[2]), max(h, last_bbox[3]))
+#                 else:
+#                     subtitle_bboxes.append((x, y, w, h))
     
-    return subtitle_bboxes, word_bboxes
+#     return subtitle_bboxes, word_bboxes
 
-def draw_bounding_boxes(frame, subtitle_bboxes, word_bboxes):
-    for (x, y, w, h) in subtitle_bboxes:
-        frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
-    for (x, y, w, h) in word_bboxes:
-        frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
-    return frame
+# def draw_bounding_boxes(frame, subtitle_bboxes, word_bboxes):
+#     for (x, y, w, h) in subtitle_bboxes:
+#         frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+#     for (x, y, w, h) in word_bboxes:
+#         frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
+#     return frame
 
 
-def crop_caption_part(image):
-    subtitle_bboxes,word_boxes = detect_subtitles(image)
-    if len(subtitle_bboxes) == 0:
-        return image
-    #retrutns subtitle part of the image
-    else:
-        x,y,w,h = subtitle_bboxes[-1]
-        return image[y:y+h, x:x+w]
+# def crop_caption_part(image):
+#     subtitle_bboxes,word_boxes = detect_subtitles(image)
+#     if len(subtitle_bboxes) == 0:
+#         return image
+#     #retrutns subtitle part of the image
+#     else:
+#         x,y,w,h = subtitle_bboxes[-1]
+#         return image[y:y+h, x:x+w]
     
-def try_detect_and_crop_all_caption_parts(image):
-    subtitle_bboxes, word_boxes = detect_subtitles(image)
-    if len(subtitle_bboxes) == 0:
-        return image
-    else:
-        x1, y1, _, _ = subtitle_bboxes[0]
-        x2, y2, _, _ = subtitle_bboxes[-1]
-        return image[y1:y2, x1:x2]
+# def try_detect_and_crop_all_caption_parts(image):
+#     subtitle_bboxes, word_boxes = detect_subtitles(image)
+#     if len(subtitle_bboxes) == 0:
+#         return image
+#     else:
+#         x1, y1, _, _ = subtitle_bboxes[0]
+#         x2, y2, _, _ = subtitle_bboxes[-1]
+#         return image[y1:y2, x1:x2]
 
 
 
