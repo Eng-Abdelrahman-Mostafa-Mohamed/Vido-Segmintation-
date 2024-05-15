@@ -37,6 +37,7 @@ def crop_caption_part(image):
     subtitle_bboxes,word_boxes = detect_subtitles(image)
     if len(subtitle_bboxes) == 0:
         return image
+    #retrutns subtitle part of the image
     else:
         x,y,w,h = subtitle_bboxes[-1]
         return image[y:y+h, x:x+w]
