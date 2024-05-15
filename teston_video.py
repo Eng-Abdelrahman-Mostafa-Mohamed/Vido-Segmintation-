@@ -119,4 +119,4 @@ cv2.destroyAllWindows()
 # cv2.imshow(captions[0],cmap='gray')
 
 
-#finnaly as my try i found  that the text is not clear and the bounding boxes are not accurate so we need to improve the segmentation and the OCR accuracy it's extract objs as text captions
+#### finnaly as my try i found  that the text is not clear and the bounding boxes are not accurate so we need to improve the segmentation and the OCR accuracy it's extract objs as text captions
