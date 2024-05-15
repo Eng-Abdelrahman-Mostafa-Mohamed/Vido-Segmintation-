@@ -11,7 +11,7 @@ def detect_subtitles(processed_frame):
     n_boxes = len(d['level'])
     for i in range(n_boxes):
         (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
-        text = d['text'][i].strip()
+        text = d['text'][i].strip() # for deviding sent into words 
         if text:
             word_bboxes.append((x, y, w, h))
             if len(subtitle_bboxes) == 0:
@@ -55,7 +55,7 @@ while True:
 
     # Apply adaptive thresholding
     # what is adaptive thresholding : Adaptive thresholding is the method where the threshold value is calculated for smaller regions and therefore, there will be different threshold values for different regions.
-    #what is there arguments : cv2.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C) what C represent and block size represent 
+    # cv2.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C) what C represent and block size represent 
     filtered_image = nd.gaussian_laplace(gray, sigma=3)
     thresh = cv2.adaptiveThreshold(filtered_image, 255, cv2.ADAPTIVE_THRESH_MEAN_C,
                                  cv2.THRESH_BINARY, 7, 2)
