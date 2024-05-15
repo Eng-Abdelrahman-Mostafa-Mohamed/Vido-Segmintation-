@@ -1,2 +1,2 @@
-# Vido-Segmintation 
+# Video-Segmintation 
  
