@@ -70,6 +70,8 @@ import matplotlib.pyplot as plt
 
 
 
+
+
 cap = cv2.VideoCapture('Project Video.mp4')
 captions=[]
 all_captions=[]
