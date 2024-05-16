@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
 import scipy.ndimage as nd
-import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
+import matplotlib.pyplot as plt 
+# import pytesseract
+# pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
 
 
 # First we want to apply edge detection and smoothing filters to the frame We will use the Gaussian Laplacian filter for edge detection and Gaussian filter for smoothing
@@ -11,6 +12,7 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files (x86)\\Tesseract-OCR
 # Apply tesseract OCR to detect the text in the frame
 # Draw bounding boxes around the detected text and apply last steps for segment text captions only 
 # Display the frame with the bounding boxes
+
 
 
 
@@ -64,6 +66,7 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files (x86)\\Tesseract-OCR
 #         x1, y1, _, _ = subtitle_bboxes[0]
 #         x2, y2, _, _ = subtitle_bboxes[-1]
 #         return image[y1:y2, x1:x2]
+
 
 
 
