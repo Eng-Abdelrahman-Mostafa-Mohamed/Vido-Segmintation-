@@ -38,7 +38,7 @@ closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel_closing, iterations=
 
 
 print(closing)
-detected_image , cordinates=detect_((np.invert(closing)*50))
+detected_image , cordinates=detect_((closing*10))
 cv2.imshow('detection_image',detected_image )
 # x_start_seg_part, y_start_seg_part, x_end_seg, y_end_seg = int(cordinates[0][0]), int(cordinates[0][1]), int(cordinates[-1][0]), int(cordinates[-1][1])
 x_start_seg_part, y_start_seg_part, x_end_seg, y_end_seg =[0,500,900,600]
