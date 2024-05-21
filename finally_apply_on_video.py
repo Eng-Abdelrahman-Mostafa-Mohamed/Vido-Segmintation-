@@ -11,7 +11,9 @@ def click_event(event, x, y, flags, param):
 
     
 def detect_(cleaned_image):
-    contours, _ = cv2.findContours(cleaned_image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(cleaned_image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE, offset=(0, 0))
+    # find cordinates on each sentence and all sentences 2 rectangles 
+    # sentence_contours = cv2.findContours(cleaned_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     coordinates= []
     
     # Get coordinates
@@ -24,6 +26,7 @@ def detect_(cleaned_image):
         # Draw a rectangle around the object
         cv2.rectangle(cleaned_image,(x, y), (x+w, y+h), (0, 255, 0), 4)        
     return cleaned_image ,coordinates
+
 
 
 
@@ -40,6 +43,7 @@ def preprocess_frame(frame):
 
 # x_start_seg_part, y_start_seg_part, x_end_seg, y_end_seg =[2,500,900,600]
 x_start_seg_part, y_start_seg_part, x_end_seg, y_end_seg =[2,600,2000,750]
+
 
 cap = cv2.VideoCapture('Project Video.mp4')
 while True:
